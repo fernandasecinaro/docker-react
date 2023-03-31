@@ -14,3 +14,4 @@ script:
   # contains all the contains needed to run our test suite
   # npm run test command never exits, so we will use -e CI=true so it could exit
   - docker run -e CI=true fernandasecinaro/docker-react npm run test
+  # if we get a code error different than 0, the test suite will fail.
