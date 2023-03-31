@@ -1,0 +1,16 @@
+sudo: required
+# docker need superuser permissions
+services:
+  # travis need to understand we need docker CLI pre installed. Travis automatically installs a copy of Docker when doing this
+  - docker
+
+before_install:
+  # commands executed before our test are ran. set up needed before deploy our project or run tests.
+  # build docker image before our tests run
+  - docker build -t fernandasecinaro/docker-react -f Dockerfile.dev .
+  # we need to put a name so we can reference the image later
+
+script:
+  # contains all the contains needed to run our test suite
+  # npm run test command never exits, so we will use -e CI=true so it could exit
+  - docker run -e CI=true fernandasecinaro/docker-react npm run test
