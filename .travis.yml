@@ -15,3 +15,18 @@ script:
   # npm run test command never exits, so we will use -e CI=true so it could exit
   - docker run -e CI=true fernandasecinaro/docker-react npm run test
   # if we get a code error different than 0, the test suite will fail. If we get 0, it will succeed
+
+deploy:
+  # how to take our app and deploy it on aws
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-us-east-2-011611579532"
+  bucket_path: "docker"
+  # path is the app name
+  on:
+    branch: master
+    # only deploy when we push to master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
