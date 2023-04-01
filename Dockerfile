@@ -11,9 +11,7 @@ RUN npm run build
 # /app/build <- This folder has all the stuff we care for production
 
 FROM nginx
-
-WORKDIR /the/workdir/path
-
+EXPOSE 80
 # copy from a different phase (builder)
 COPY --from=builder /app/build /usr/share/nginx/html
 
